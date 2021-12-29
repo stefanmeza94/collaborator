@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -7,11 +7,15 @@ import store from './redux/store/store';
 import { Provider } from 'react-redux';
 import './theme.module.css';
 
+import './localization/i18n';
+
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <App />
-        </Provider>
+        <Suspense fallback={<div>Loading...</div>}>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </Suspense>
     </React.StrictMode>,
     document.getElementById('root')
 );
