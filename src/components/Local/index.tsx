@@ -12,7 +12,7 @@ const Local = () => {
     return (
         <div className={styles.local}>
             <h1>Choose your language</h1>
-            <button onClick={() => changeLanguage('en')}>EU</button>
+            <button onClick={() => changeLanguage('en')}>EN</button>
             <button onClick={() => changeLanguage('de')}>DE</button>
             <p>
                 <Trans i18nKey="description.part1">
