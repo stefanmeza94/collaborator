@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { datesGenerator } from 'dates-generator';
-import { ICalendar, IGeneratedDate } from './types';
+import { ICalendar, IGeneratedDate } from '@components/Timesheet/types';
 
 const months = [
     'Jan',

@@ -1,4 +1,4 @@
-import sidebarData from './SidebarData';
+import sidebarData from '@components/Sidebar/SidebarData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Sidebar.module.css';
 
