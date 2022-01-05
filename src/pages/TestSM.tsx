@@ -1,7 +1,12 @@
-import Local from '@components/Local';
+import ClientPage from '@components/ClientPage';
+import Layout from '@components/Layout';
 
 const TestSM = () => {
-    return <Local />;
+    return (
+        <Layout>
+            <ClientPage />
+        </Layout>
+    );
 };
 
 export default TestSM;

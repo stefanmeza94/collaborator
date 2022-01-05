@@ -1,0 +1,128 @@
+.clientPage {
+    background-color: #525f7f;
+    padding-left: 30px;
+    min-height: 100vh;
+}
+
+.clientPage h1 {
+    padding-top: 1rem;
+    padding-bottom: 0.25rem;
+}
+
+.inputField {
+    position: relative;
+    margin-bottom: 27px;
+    max-width: 320px;
+}
+
+.inputField input {
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: white;
+    background: transparent;
+    border-bottom: 1px solid var(--border-color);
+    padding: 5px;
+    font-size: 18px;
+}
+
+.icon {
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.chooseCity {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 22px;
+}
+
+.chooseCity button {
+    margin-right: 21px;
+    display: inline-block;
+    padding: 6px 55px;
+    background: transparent;
+    border: 1px solid var(--pink-color);
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.selectedCitys {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.selectedCity {
+    width: 150px;
+    background: var(--pink-color);
+    border-radius: 10px;
+    padding: 6px 21px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.selectedCity p {
+    font-size: 20px;
+    line-height: 23.44px;
+}
+
+.selectedCity p:nth-child(2) {
+    cursor: pointer;
+}
+
+.listedCompanies {
+    max-width: 75%;
+    padding: 45px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(246px, 1fr));
+    justify-items: start;
+    gap: 40px;
+}
+
+.listedCompaniesItem {
+    background: var(--dark-background-color);
+    padding: 18px 50px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+}
+
+.listedCompaniesItem .circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--text-dark-color);
+    margin-bottom: 20px;
+}
+
+.listedCompaniesItem h3 {
+    font-size: 20px;
+    line-height: 23.44px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.listedCompaniesItem p {
+    font-size: 14px;
+    line-height: 16.41px;
+}
+
+@media screen and (max-width: 886px) {
+    .chooseCity {
+        flex-direction: column;
+        max-width: 320px;
+    }
+
+    .chooseCity button {
+        margin-bottom: 0.5rem;
+    }
+}

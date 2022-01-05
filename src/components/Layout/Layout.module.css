@@ -11,8 +11,9 @@
 }
 
 .main-content {
-    height: 100%;
-    overflow: hidden;
+    /* height: 100%;
+    overflow: hidden; */
+    flex-grow: 1;
 }
 
 @media only screen and (min-width: 400px) {
