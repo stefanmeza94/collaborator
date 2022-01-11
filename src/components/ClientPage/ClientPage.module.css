@@ -55,20 +55,23 @@
 
 .selectedCitys {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     color: #fff;
 }
 
 .selectedCity {
+    margin-right: 20px;
     width: 150px;
     background: var(--pink-color);
     border-radius: 10px;
     padding: 6px 21px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .selectedCity p {
+    text-transform: capitalize;
     font-size: 20px;
     line-height: 23.44px;
 }
@@ -81,7 +84,7 @@
     max-width: 75%;
     padding: 45px 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(246px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     justify-items: start;
     gap: 40px;
 }
