@@ -27,11 +27,18 @@
     font-size: 18px;
 }
 
-.icon {
+.inputField button {
     position: absolute;
     top: 4px;
     right: 5px;
+    display: inline-block;
+    background: transparent;
     cursor: pointer;
+    border: none;
+    color: #fff;
+}
+
+.icon {
     font-size: 20px;
 }
 
@@ -42,6 +49,7 @@
 }
 
 .chooseCity button {
+    text-transform: capitalize;
     margin-right: 21px;
     display: inline-block;
     padding: 6px 55px;
@@ -81,11 +89,11 @@
 }
 
 .listedCompanies {
-    max-width: 75%;
+    max-width: 750px;
     padding: 45px 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    justify-items: start;
+    justify-items: center;
     gap: 40px;
 }
 
