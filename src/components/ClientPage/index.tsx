@@ -1,18 +1,34 @@
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import Layout from '@components/Layout';
 import { RootState } from '@reduxStore/reducers';
-import { addCity } from '@reduxStore/actions/clientPage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faCity, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@components/ClientPage/ClientPage.module.css';
 
 const cities = ['USA', 'Europe', 'Australia'];
 
+type selectedCityType = {
+    id: string;
+    cityName: string;
+};
+
 function ClientPage() {
-    const dispatch = useDispatch();
-    const selectedCities = useSelector((state: RootState) => state.client);
-    console.log(selectedCities);
+    const [selectedCity, setSelectedCity] = useState<selectedCityType[]>([]);
+
+    const addCityHandler = (e: any) => {
+        selectedCity.forEach((city) => {
+            if (city.cityName.includes(e.target.innerText)) {
+                return;
+            } else {
+                const newCity = {
+                    id: new Date().toISOString(),
+                    cityName: e.target.innerText,
+                };
+                setSelectedCity([...selectedCity, newCity]);
+            }
+        });
+    };
 
     return (
         <section className={styles.clientPage}>
@@ -24,17 +40,22 @@ function ClientPage() {
             <div className={styles.chooseCity}>
                 {cities.map((city) => {
                     return (
-                        <button onClick={() => dispatch(addCity())} key={city}>
+                        <button onClick={addCityHandler} key={city}>
                             {city}
                         </button>
                     );
                 })}
             </div>
             <div className={styles.selectedCitys}>
-                <div className={styles.selectedCity}>
-                    <p>Europe</p>
-                    <p>X</p>
-                </div>
+                {selectedCity.map((city) => {
+                    const { id, cityName } = city;
+                    return (
+                        <div key={id} className={styles.selectedCity}>
+                            <p>{cityName}</p>
+                            <p>X</p>
+                        </div>
+                    );
+                })}
             </div>
             <div className={styles.listedCompanies}>
                 <div className={styles.listedCompaniesItem}>

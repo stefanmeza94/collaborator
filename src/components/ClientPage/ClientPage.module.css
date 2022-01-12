@@ -55,12 +55,13 @@
 
 .selectedCitys {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     color: #fff;
 }
 
 .selectedCity {
     width: 150px;
+    margin-right: 20px;
     background: var(--pink-color);
     border-radius: 10px;
     padding: 6px 21px;
