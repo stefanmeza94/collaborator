@@ -6,16 +6,24 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { continents } from '@components/ClientPage/continents';
 import { companyNames } from '@components/ClientPage/companyNamesData';
 import { useSearchParams } from 'react-router-dom';
+import { CompanyType } from '@components/ClientPage/types';
 import styles from '@components/ClientPage/ClientPage.module.css';
 
 function ClientPage() {
     const [input, setInput] = useState('');
     const [searchParams, setSearchParams] = useSearchParams({});
-    const [filteredCompanies, setFilteredCompanies] = useState(companyNames);
+    const [filteredCompanies, setFilteredCompanies] =
+        useState<CompanyType['company']>(companyNames);
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.value);
     };
+
+    function chooseFilteredCompany(choosenContinent: string) {
+        return filteredCompanies.filter(
+            (company) => company.from.toLowerCase() === choosenContinent
+        );
+    }
 
     const handleInputSearch = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -24,16 +32,22 @@ function ClientPage() {
             searchParams.set('search', input);
             setSearchParams(searchParams);
 
-            const newFilteredCompanies = filteredCompanies.filter((company) => {
-                console.log(company.from, searchParams.get('search'));
-                return (
-                    company.from.toLowerCase() ===
-                    searchParams.get('search')?.toLowerCase()
-                );
-            });
-            console.log(newFilteredCompanies);
-            setFilteredCompanies(newFilteredCompanies);
+            const currentCoosen = searchParams.get('search');
+            console.log(currentCoosen);
+
+            switch (currentCoosen) {
+                case 'usa':
+                    setFilteredCompanies(chooseFilteredCompany('usa'));
+                    break;
+                case 'europe':
+                    setFilteredCompanies(chooseFilteredCompany('europe'));
+                    break;
+                case 'australia':
+                    setFilteredCompanies(chooseFilteredCompany('australia'));
+                    break;
+            }
         } else {
+            setFilteredCompanies(companyNames);
             searchParams.delete('search');
             setSearchParams(searchParams);
         }
@@ -47,14 +61,10 @@ function ClientPage() {
     //     setSearchParams(searchParams);
     // };
 
-    const handleRemoveBtn = (id: string) => {
-        searchParams.delete(id);
-        setSearchParams(searchParams);
-    };
-
-    useEffect(() => {
-        console.log(filteredCompanies);
-    }, [filteredCompanies]);
+    // const handleRemoveBtn = (id: string) => {
+    //     searchParams.delete(id);
+    //     setSearchParams(searchParams);
+    // };
 
     return (
         <section className={styles.clientPage}>
@@ -95,13 +105,23 @@ function ClientPage() {
                         return (
                             <div key={name} className={styles.selectedCity}>
                                 <p>{name}</p>
-                                <p onClick={() => handleRemoveBtn(name)}>X</p>
+                                {/* <p onClick={() => handleRemoveBtn(name)}>X</p> */}
                             </div>
                         );
                     })}
             </div>
 
             <div className={styles.listedCompanies}>
+                {filteredCompanies.map((company) => {
+                    const { id, companyName, ceo } = company;
+                    return (
+                        <div key={id} className={styles.listedCompaniesItem}>
+                            <div className={styles.circle}></div>
+                            <h3>{companyName}</h3>
+                            <p>{ceo}</p>
+                        </div>
+                    );
+                })}
                 {/* {filteredCompanies
                     .filter((company) => {
                         if (!searchParams.get('search')) {

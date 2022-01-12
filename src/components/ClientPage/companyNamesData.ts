@@ -1,12 +1,6 @@
-interface CompnayType {
-    id: number;
-    companyName: any;
-    img: string;
-    from: string;
-    ceo: any;
-}
+import { CompanyType } from '@components/ClientPage/types';
 
-export const companyNames: CompnayType[] = [
+export const companyNames: CompanyType['company'] = [
     {
         id: 1,
         companyName: 'Apple Inc',
