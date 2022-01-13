@@ -9,15 +9,18 @@ import { useSearchParams } from 'react-router-dom';
 import { CompanyType } from '@components/ClientPage/types';
 import styles from '@components/ClientPage/ClientPage.module.css';
 
+const initialStateCompanies = companyNames;
+
 function ClientPage() {
     const [input, setInput] = useState('');
     const [searchParams, setSearchParams] = useSearchParams({});
-    const [companies, setCompanies] =
-        useState<CompanyType['company']>(companyNames);
+    const [companies, setCompanies] = useState<CompanyType['company']>(
+        initialStateCompanies
+    );
 
     // helper funcions
-    function setQueryStrings() {
-        searchParams.set('search', input);
+    function setQueryStrings(queryPrm: string) {
+        searchParams.set('search', queryPrm);
         setSearchParams(searchParams);
     }
 
@@ -28,14 +31,18 @@ function ClientPage() {
 
     function getQueryStringAndFilterCompanies() {
         const currentQueryString = searchParams.get('search');
-        const filteredCompanies = companies.filter((company) => {
+        const filteredCompanies = initialStateCompanies.filter((company) => {
             if (
-                company.from.toLowerCase() === currentQueryString ||
-                company.companyName.toLowerCase() === currentQueryString
+                company.from.toLowerCase() ===
+                    currentQueryString?.toLowerCase() ||
+                company.companyName.toLowerCase() ===
+                    currentQueryString?.toLowerCase()
             ) {
                 return true;
             }
         });
+        console.log(filteredCompanies);
+        setCompanies(filteredCompanies);
     }
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,20 +57,26 @@ function ClientPage() {
         e.preventDefault();
 
         if (input) {
-            setQueryStrings();
+            setQueryStrings(input);
             getQueryStringAndFilterCompanies();
         } else {
             deleteQueryStrings();
+            setCompanies(initialStateCompanies);
         }
 
         setInput('');
     };
 
-    // const handleButtonClick = (city: string, id: string) => {
-    //     console.log('radi button');
-    //     searchParams.set(id, city);
-    //     setSearchParams(searchParams);
-    // };
+    const handleButtonClick = (continent: string) => {
+        const allQueryStrings = searchParams.getAll('search');
+
+        if (!allQueryStrings.includes(continent.toLowerCase())) {
+            searchParams.append('search', continent.toLowerCase());
+            setSearchParams(searchParams);
+        }
+
+        // setQueryStrings(continent);
+    };
 
     // const handleRemoveBtn = (id: string) => {
     //     searchParams.delete(id);
@@ -91,7 +104,7 @@ function ClientPage() {
                     return (
                         <button
                             key={continent}
-                            // onClick={() => handleButtonClick(continent)}
+                            onClick={() => handleButtonClick(continent)}
                         >
                             {continent}
                         </button>
@@ -99,21 +112,7 @@ function ClientPage() {
                 })}
             </div>
 
-            <div className={styles.selectedCitys}>
-                {continents
-                    .filter((continent) => {
-                        return searchParams.get(continent);
-                    })
-                    .map((name) => {
-                        // const { name, id } = btn;
-                        return (
-                            <div key={name} className={styles.selectedCity}>
-                                <p>{name}</p>
-                                {/* <p onClick={() => handleRemoveBtn(name)}>X</p> */}
-                            </div>
-                        );
-                    })}
-            </div>
+            <div className={styles.selectedCitys}>{}</div>
 
             <div className={styles.listedCompanies}>
                 {companies.map((company) => {
