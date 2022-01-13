@@ -26,6 +26,7 @@ function ClientPage() {
 
     function deleteQueryStrings() {
         searchParams.delete('search');
+
         setSearchParams(searchParams);
     }
 
@@ -41,17 +42,12 @@ function ClientPage() {
                 return true;
             }
         });
-        console.log(filteredCompanies);
         setCompanies(filteredCompanies);
     }
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.value);
     };
-
-    // function chooseFilteredCompany(choosenContinent: string) {
-    //     return filteredCompanies.filter(company => company.from.toLowerCase() === choosenContinent);
-    // }
 
     const handleInputSearch = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -67,21 +63,23 @@ function ClientPage() {
         setInput('');
     };
 
-    const handleButtonClick = (continent: string) => {
-        const allQueryStrings = searchParams.getAll('search');
-
-        if (!allQueryStrings.includes(continent.toLowerCase())) {
-            searchParams.append('search', continent.toLowerCase());
-            setSearchParams(searchParams);
-        }
+    const handleButtonClick = (id: number, name: string) => {
+        searchParams.set(String(id), name.toLowerCase());
+        setSearchParams(searchParams);
 
         // setQueryStrings(continent);
     };
 
-    // const handleRemoveBtn = (id: string) => {
-    //     searchParams.delete(id);
-    //     setSearchParams(searchParams);
-    // };
+    const handleRemoveBtn = (id: string) => {
+        searchParams.delete(id);
+        setSearchParams(searchParams);
+    };
+
+    // function filteredBtnCompanies(id: number) {
+    //     return companyNames.filter(company => {
+    //         return searchParams.get(String(id)) === company.from;
+    //     })
+    // }
 
     return (
         <section className={styles.clientPage}>
@@ -101,30 +99,59 @@ function ClientPage() {
 
             <div className={styles.chooseCity}>
                 {continents.map((continent) => {
+                    const { id, name } = continent;
                     return (
                         <button
-                            key={continent}
-                            onClick={() => handleButtonClick(continent)}
+                            key={id}
+                            onClick={() => handleButtonClick(id, name)}
                         >
-                            {continent}
+                            {name}
                         </button>
                     );
                 })}
             </div>
 
-            <div className={styles.selectedCitys}>{}</div>
+            <div className={styles.selectedCitys}>
+                {continents
+                    .filter((continent) => {
+                        const { id, name } = continent;
+                        if (searchParams.get(String(id))) return true;
+                    })
+                    .map((btn) => {
+                        const { id, name } = btn;
+                        return (
+                            <div key={id} className={styles.selectedCity}>
+                                <p>{name}</p>
+                                <p onClick={() => handleRemoveBtn(String(id))}>
+                                    X
+                                </p>
+                            </div>
+                        );
+                    })}
+            </div>
 
             <div className={styles.listedCompanies}>
-                {companies.map((company) => {
-                    const { id, companyName, ceo } = company;
-                    return (
-                        <div key={id} className={styles.listedCompaniesItem}>
-                            <div className={styles.circle}></div>
-                            <h3>{companyName}</h3>
-                            <p>{ceo}</p>
-                        </div>
-                    );
-                })}
+                {companies
+                    .filter((company) => {
+                        const { id, from } = company;
+                        for (let i = 0; i < continents.length; i++) {
+                            searchParams.get(String(continents[i].id));
+                        }
+                        return searchParams.get;
+                    })
+                    .map((company) => {
+                        const { id, companyName, ceo } = company;
+                        return (
+                            <div
+                                key={id}
+                                className={styles.listedCompaniesItem}
+                            >
+                                <div className={styles.circle}></div>
+                                <h3>{companyName}</h3>
+                                <p>{ceo}</p>
+                            </div>
+                        );
+                    })}
                 {/* {filteredCompanies
                     .filter((company) => {
                         if (!searchParams.get('search')) {
