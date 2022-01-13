@@ -63,7 +63,10 @@
         "logout": "logout",
         "addEmployee": "Add An Employee",
         "jobTitle": "Job Title",
-        "selectJobTitle": "Select A Job Title"
+        "selectJobTitle": "Select A Job Title",
+        "usa": "USA",
+        "europe": "Europe",
+        "australia": "Australia"
     },
     "days": {
         "mon": "Monday",

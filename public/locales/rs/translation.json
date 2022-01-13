@@ -63,7 +63,10 @@
         "logout": "izloguj se",
         "addEmployee": "Dodaj zaposlenog",
         "jobTitle": "Pozicija",
-        "selectJobTitle": "Izaberi poziciju"
+        "selectJobTitle": "Izaberi poziciju",
+        "usa": "SAD",
+        "europe": "Evropa",
+        "australia": "Australija"
     },
     "days": {
         "mon": "Ponedeljak",

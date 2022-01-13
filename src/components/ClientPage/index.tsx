@@ -8,10 +8,12 @@ import { companyNames } from '@components/ClientPage/companyNamesData';
 import { useSearchParams } from 'react-router-dom';
 import { CompanyType } from '@components/ClientPage/types';
 import styles from '@components/ClientPage/ClientPage.module.css';
+import { useTranslation } from 'react-i18next';
 
 const initialStateCompanies = companyNames;
 
 function ClientPage() {
+    const { t } = useTranslation();
     const [input, setInput] = useState('');
     const [searchParams, setSearchParams] = useSearchParams({});
     const [companies, setCompanies] = useState<CompanyType['company']>(
@@ -84,7 +86,7 @@ function ClientPage() {
 
     return (
         <section className={styles.clientPage}>
-            <h1>Clients</h1>
+            <h1>{t('description.clients')}</h1>
 
             <div className={styles.inputField}>
                 <form onSubmit={handleInputSearch}>
@@ -106,7 +108,7 @@ function ClientPage() {
                             key={id}
                             onClick={() => handleButtonClick(name)}
                         >
-                            {name}
+                            {t(`description.${name.toLowerCase()}`)}
                         </button>
                     );
                 })}
@@ -122,7 +124,7 @@ function ClientPage() {
                         const { id, name } = btn;
                         return (
                             <div key={id} className={styles.selectedCity}>
-                                <p>{name}</p>
+                                <p>{t(`description.${name.toLowerCase()}`)}</p>
                                 <p onClick={() => handleRemoveBtn(name)}>X</p>
                             </div>
                         );

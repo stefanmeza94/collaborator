@@ -63,7 +63,10 @@
         "logout": "abmelden",
         "addEmployee": "Fügen Sie eine Angestellte hinzu",
         "jobTitle": "Berufsbezeichnung",
-        "selectJobTitle": "Wählen Sie eine Berufsbezeichnung"
+        "selectJobTitle": "Wählen Sie eine Berufsbezeichnung",
+        "usa": "UNS",
+        "europe": "Europa",
+        "australia": "Australien"
     },
     "days": {
         "mon": "Montag",
