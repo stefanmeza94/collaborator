@@ -63,23 +63,24 @@ function ClientPage() {
         setInput('');
     };
 
-    const handleButtonClick = (id: number, name: string) => {
-        searchParams.set(String(id), name.toLowerCase());
-        setSearchParams(searchParams);
-
-        // setQueryStrings(continent);
-    };
-
-    const handleRemoveBtn = (id: string) => {
-        searchParams.delete(id);
+    const handleButtonClick = (name: string) => {
+        searchParams.set(name.toLowerCase(), name.toLowerCase());
         setSearchParams(searchParams);
     };
 
-    // function filteredBtnCompanies(id: number) {
-    //     return companyNames.filter(company => {
-    //         return searchParams.get(String(id)) === company.from;
-    //     })
-    // }
+    const handleRemoveBtn = (name: string) => {
+        searchParams.delete(name.toLowerCase());
+        setSearchParams(searchParams);
+    };
+
+    function countButton() {
+        const filters: string[] = [];
+        const keys = searchParams.keys();
+        for (const key of keys) {
+            key !== 'search' ? filters.push(key) : null;
+        }
+        return filters.length;
+    }
 
     return (
         <section className={styles.clientPage}>
@@ -103,7 +104,7 @@ function ClientPage() {
                     return (
                         <button
                             key={id}
-                            onClick={() => handleButtonClick(id, name)}
+                            onClick={() => handleButtonClick(name)}
                         >
                             {name}
                         </button>
@@ -115,16 +116,14 @@ function ClientPage() {
                 {continents
                     .filter((continent) => {
                         const { id, name } = continent;
-                        if (searchParams.get(String(id))) return true;
+                        if (searchParams.get(name.toLowerCase())) return true;
                     })
                     .map((btn) => {
                         const { id, name } = btn;
                         return (
                             <div key={id} className={styles.selectedCity}>
                                 <p>{name}</p>
-                                <p onClick={() => handleRemoveBtn(String(id))}>
-                                    X
-                                </p>
+                                <p onClick={() => handleRemoveBtn(name)}>X</p>
                             </div>
                         );
                     })}
@@ -134,10 +133,8 @@ function ClientPage() {
                 {companies
                     .filter((company) => {
                         const { id, from } = company;
-                        for (let i = 0; i < continents.length; i++) {
-                            searchParams.get(String(continents[i].id));
-                        }
-                        return searchParams.get;
+                        if (!countButton()) return true;
+                        if (searchParams.get(from.toLowerCase())) return true;
                     })
                     .map((company) => {
                         const { id, companyName, ceo } = company;
@@ -152,49 +149,6 @@ function ClientPage() {
                             </div>
                         );
                     })}
-                {/* {filteredCompanies
-                    .filter((company) => {
-                        if (!searchParams.get('search')) {
-                            return true;
-                        }
-
-                        const { companyName, ceo } = company;
-                        return (
-                            companyName
-                                .toLowerCase()
-                                .includes(
-                                    searchParams.get('search')?.toLowerCase()
-                                ) ||
-                            ceo
-                                .toLowerCase()
-                                .includes(
-                                    searchParams.get('search')?.toLowerCase()
-                                )
-                        );
-                    })
-                    .filter(company => {
-                        // problem je da uskladimo id iz url-a sa from parametrom iz compnay
-                        const {id} = company;
-                        if (searchParams.get())
-                    })
-                    .map((company) => {
-                        const { companyName, ceo, id } = company;
-                        return (
-                            <div
-                                key={id}
-                                className={styles.listedCompaniesItem}
-                            >
-                                <div className={styles.circle}></div>
-                                <h3>{companyName}</h3>
-                                <p>{ceo}</p>
-                            </div>
-                        );
-                    })} */}
-                {/* <div className={styles.listedCompaniesItem}>
-                    <div className={styles.circle}></div>
-                    <h3>Company name</h3>
-                    <p>CEO&apos;s FULLNAME</p>
-                </div> */}
             </div>
         </section>
     );
