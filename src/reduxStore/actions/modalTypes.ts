@@ -1,5 +1,6 @@
-const modalTypes = {
-    ADD_NEW_SKILL: 'ADD_NEW_SKILL',
-};
-
-export default modalTypes;
+export enum modalTypes {
+    addNewSkill = 'addNewSkill',
+    addNewClient = 'addNewClient',
+    addNewTimesheetItem = 'addNewTimesheetItem',
+    addNewEmployee = 'addNewEmployee',
+}
