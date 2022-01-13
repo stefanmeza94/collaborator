@@ -12,44 +12,48 @@ import styles from '@components/ClientPage/ClientPage.module.css';
 function ClientPage() {
     const [input, setInput] = useState('');
     const [searchParams, setSearchParams] = useSearchParams({});
-    const [filteredCompanies, setFilteredCompanies] =
+    const [companies, setCompanies] =
         useState<CompanyType['company']>(companyNames);
+
+    // helper funcions
+    function setQueryStrings() {
+        searchParams.set('search', input);
+        setSearchParams(searchParams);
+    }
+
+    function deleteQueryStrings() {
+        searchParams.delete('search');
+        setSearchParams(searchParams);
+    }
+
+    function getQueryStringAndFilterCompanies() {
+        const currentQueryString = searchParams.get('search');
+        const filteredCompanies = companies.filter((company) => {
+            if (
+                company.from.toLowerCase() === currentQueryString ||
+                company.companyName.toLowerCase() === currentQueryString
+            ) {
+                return true;
+            }
+        });
+    }
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.value);
     };
 
-    function chooseFilteredCompany(choosenContinent: string) {
-        return filteredCompanies.filter(
-            (company) => company.from.toLowerCase() === choosenContinent
-        );
-    }
+    // function chooseFilteredCompany(choosenContinent: string) {
+    //     return filteredCompanies.filter(company => company.from.toLowerCase() === choosenContinent);
+    // }
 
     const handleInputSearch = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (input) {
-            searchParams.set('search', input);
-            setSearchParams(searchParams);
-
-            const currentCoosen = searchParams.get('search');
-            console.log(currentCoosen);
-
-            switch (currentCoosen) {
-                case 'usa':
-                    setFilteredCompanies(chooseFilteredCompany('usa'));
-                    break;
-                case 'europe':
-                    setFilteredCompanies(chooseFilteredCompany('europe'));
-                    break;
-                case 'australia':
-                    setFilteredCompanies(chooseFilteredCompany('australia'));
-                    break;
-            }
+            setQueryStrings();
+            getQueryStringAndFilterCompanies();
         } else {
-            setFilteredCompanies(companyNames);
-            searchParams.delete('search');
-            setSearchParams(searchParams);
+            deleteQueryStrings();
         }
 
         setInput('');
@@ -112,7 +116,7 @@ function ClientPage() {
             </div>
 
             <div className={styles.listedCompanies}>
-                {filteredCompanies.map((company) => {
+                {companies.map((company) => {
                     const { id, companyName, ceo } = company;
                     return (
                         <div key={id} className={styles.listedCompaniesItem}>
