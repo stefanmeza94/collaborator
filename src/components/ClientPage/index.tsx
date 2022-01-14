@@ -90,7 +90,7 @@ function ClientPage() {
 
             <div className={styles.inputField}>
                 <form onSubmit={handleInputSearch}>
-                    <input type="text" value={input} onChange={handleInput} />
+                    <input type="search" value={input} onChange={handleInput} />
                     <button type="submit">
                         <FontAwesomeIcon
                             className={styles.icon}
@@ -114,7 +114,7 @@ function ClientPage() {
                 })}
             </div>
 
-            <div className={styles.selectedCitys}>
+            <div className={styles.selectedCities}>
                 {continents
                     .filter((continent) => {
                         const { id, name } = continent;

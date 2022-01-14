@@ -1,5 +1,5 @@
 .clientPage {
-    background-color: #525f7f;
+    background-color: var(--page-background-color);
     padding-left: 30px;
     min-height: 100vh;
 }
@@ -7,6 +7,7 @@
 .clientPage h1 {
     padding-top: 1rem;
     padding-bottom: 0.25rem;
+    color: var(--light-background-color);
 }
 
 .inputField {
@@ -20,7 +21,7 @@
     width: 100%;
     border: none;
     outline: none;
-    color: white;
+    color: var(--light-background-color);
     background: transparent;
     border-bottom: 1px solid var(--border-color);
     padding: 5px;
@@ -35,7 +36,7 @@
     background: transparent;
     cursor: pointer;
     border: none;
-    color: #fff;
+    color: var(--light-background-color);
 }
 
 .icon {
@@ -56,15 +57,15 @@
     background: transparent;
     border: 1px solid var(--pink-color);
     border-radius: 10px;
-    color: #fff;
+    color: var(--light-background-color);
     cursor: pointer;
     font-size: 18px;
 }
 
-.selectedCitys {
+.selectedCities {
     display: flex;
     justify-content: flex-start;
-    color: #fff;
+    color: var(--light-backgrond-color);
 }
 
 .selectedCity {
@@ -96,6 +97,7 @@
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     gap: 40px;
+    color: var(--light-background-color);
 }
 
 .listedCompaniesItem {
@@ -126,6 +128,8 @@
 .listedCompaniesItem p {
     font-size: 14px;
     line-height: 16.41px;
+    color: var(--text-dark-color);
+    font-weight: 700;
 }
 
 @media screen and (max-width: 886px) {
