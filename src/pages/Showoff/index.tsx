@@ -42,7 +42,7 @@ const Showoff = () => {
 
     return (
         <div>
-            <h1 style={{ color: color ? 'red' : 'blue' }}>Heading</h1>
+            <h1 style={{ color: color ? 'white' : 'black' }}>Heading</h1>
             <p>You are on this page for {timer} seconds</p>
         </div>
     );
