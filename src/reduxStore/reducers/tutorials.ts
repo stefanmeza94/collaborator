@@ -6,7 +6,7 @@ export type actionProps = {
     payload: string;
 };
 
-const initialState: itemProps[] = [
+const initialState: any[] = [
     {
         id: '1',
         name: 'John Doe',

@@ -2,7 +2,7 @@ import actionTypes from '@reduxStore/actions/actionTypes';
 
 export type itemProps = {
     id: string;
-    name: string;
+    authorName: string;
 };
 
 export const ADD_ITEM = (item: itemProps) => {

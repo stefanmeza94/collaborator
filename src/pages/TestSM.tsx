@@ -1,8 +1,8 @@
-import Tutorials from '@pages/Tutorials';
+import Showoff from '@pages/Showoff';
 import Layout from '@components/Layout';
 
 const TestSM = () => {
-    return <Tutorials />;
+    return <Showoff />;
 };
 
 export default TestSM;
