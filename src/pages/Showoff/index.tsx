@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import styles from '@pages/Showoff/Showoff.module.css';
 
 const Showoff = () => {
     const [color, setColor] = useState(false);
+    // const [modal, setModal] = useState(false);
     const [timer, setTimer] = useState(0);
 
     useEffect(() => {
@@ -26,11 +28,10 @@ const Showoff = () => {
 
     useEffect(() => {
         const loginTimer = setInterval(() => {
-            // if (timer === 10) {
-            //   console.log('timer stgo do 10 ')
-            // }
             setTimer((prevTimer) => {
-                if (prevTimer === 10) confirm('Are you asleep?');
+                if (prevTimer === 15) {
+                    confirm('Are you asleep?');
+                }
                 return prevTimer + 1;
             });
         }, 1000);
@@ -41,9 +42,11 @@ const Showoff = () => {
     }, []);
 
     return (
-        <div>
+        <div className={styles['main']}>
             <h1 style={{ color: color ? 'white' : 'black' }}>Heading</h1>
-            <p>You are on this page for {timer} seconds</p>
+            <p className={styles['text']}>
+                You are on this page for {timer} seconds
+            </p>
         </div>
     );
 };
