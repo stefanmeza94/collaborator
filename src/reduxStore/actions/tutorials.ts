@@ -11,3 +11,10 @@ export const ADD_ITEM = (item: itemProps) => {
         payload: item,
     };
 };
+
+export const DELETE_ITEM = (id: string) => {
+    return {
+        type: actionTypes.DELETE_ITEM,
+        payload: id,
+    };
+};

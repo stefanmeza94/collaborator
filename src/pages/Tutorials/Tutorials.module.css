@@ -1,0 +1,33 @@
+.main {
+    min-height: 100vh;
+}
+
+.form {
+    padding: 12px;
+}
+
+.form input {
+    font-size: 20px;
+}
+
+.lists {
+    padding: 12px;
+}
+
+.list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.authorName {
+    font-size: 18px;
+    color: white;
+}
+
+.emptyList {
+    font-size: 20px;
+    text-align: center;
+    color: white;
+}

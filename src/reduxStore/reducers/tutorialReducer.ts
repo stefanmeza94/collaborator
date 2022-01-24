@@ -1,5 +1,4 @@
 import actionTypes from '@reduxStore/actions/actionTypes';
-import { itemProps } from '@reduxStore/actions/tutorials';
 
 export type actionProps = {
     type: string;
@@ -9,18 +8,23 @@ export type actionProps = {
 const initialState: any[] = [
     {
         id: '1',
-        name: 'John Doe',
+        authorName: 'John Doe',
     },
     {
         id: '2',
-        name: 'John Smilga',
+        authorName: 'John Smilga',
     },
 ];
 
 const tutorialsReducer = (state = initialState, action: actionProps) => {
     switch (action.type) {
         case actionTypes.ADD_ITEM: {
-            const newList = [...state, action.payload];
+            return [...state, action.payload];
+        }
+        case actionTypes.DELETE_ITEM: {
+            const newList = state.filter(
+                (person) => person.id !== action.payload
+            );
             return newList;
         }
         default:
